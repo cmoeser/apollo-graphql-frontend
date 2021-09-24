@@ -1,0 +1,7 @@
+query listings() {
+ listing {
+     id
+    field_listing_title
+    field_listing_desc
+ }
+}

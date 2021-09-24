@@ -2,11 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./*"],
-      "@/*": ["./*"],
-      "~~/*": ["./*"],
-      "@@/*": ["./*"]
-    }
+      "~/*": ["/src/*"],
+      "@/*": ["./src/*"],
+      "~~/*": ["/*"],
+      "@@/*": ["/*"]
+    },
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

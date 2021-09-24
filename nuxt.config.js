@@ -1,5 +1,8 @@
 export default {
   mode: 'spa',
+  srcDir: 'src/',
+  ssr: false,
+  components: false,
   /*
    ** Headers of the page
    */
@@ -27,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/apollo-client.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -38,11 +41,40 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/apollo'],
+  /*
+   ** Apollo
+   */
+  apollo: {
+    clientConfigs: {
+      default: {
+        httpEndpoint: 'http://localhost:4000/graphql'
+      }
+    }
+  },
   /*
    ** Build configuration
    */
   build: {
+    terser: {
+      parallel: true,
+      cache: false,
+      sourceMap: false,
+      extractComments: {
+        filename: 'LICENSES'
+      },
+      terserOptions: {
+        compress: {
+          drop_console: process.env.NODE_ENV === 'production'
+        },
+        output: {
+          comments: /^\**!|@preserve|@license|@cc_on/
+        }
+      }
+    },
+    buildDir: 'dist',
+    cssSourceMap: true,
+    optimizeCSS: false,
     /*
      ** You can extend webpack config here
      */

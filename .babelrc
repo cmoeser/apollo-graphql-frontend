@@ -1,0 +1,32 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["transform-remove-console"]
+      ]
+    },
+    "production": {
+      "plugins": [["transform-remove-console", {}]]
+    },
+    "test": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+            }
+          }
+        ]
+      ],
+      "plugins": [
+        ["require-context-hook"],
+        ["@babel/plugin-proposal-decorators", { "legacy": true }],
+        ["@babel/plugin-proposal-class-properties", { "loose": true }],
+        ["transform-remove-console"]
+      ]
+    }
+  }
+}
