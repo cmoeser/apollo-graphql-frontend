@@ -1,0 +1,16 @@
+.v-navigation-drawer {
+  position: absolute;
+  z-index: 101;
+}
+
+.v-sheet.theme--dark.v-toolbar.v-toolbar--prominent {
+  background-color: var(--apollo-blue);
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  overflow: hidden;
+  background-image: url('/images/apollo_graphql.png');
+  background-position: center center;
+}

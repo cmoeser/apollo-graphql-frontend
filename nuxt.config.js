@@ -1,3 +1,6 @@
+const prodCSS =
+  process.env.NODE_ENV === 'production' ? ['~/assets/css/styles.css'] : []
+
 export default {
   mode: 'spa',
   srcDir: 'src/',
@@ -35,8 +38,10 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/google-fonts',
+    'nuxt-material-design-icons'
   ],
   /*
    ** Nuxt.js modules
@@ -49,6 +54,42 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:4000/graphql'
+      }
+    }
+  },
+  googleFonts: {
+    families: {
+      Roboto: true,
+      'Josefin+Sans': true,
+      Lato: [100, 300],
+      Raleway: {
+        wght: [100, 400],
+        ital: [100]
+      }
+    }
+  },
+  /*
+   ** vuetify module configuration
+   ** https://github.com/nuxt-community/vuetify-module
+   */
+  vuetify: {
+    treeShake: true,
+    customVariables: prodCSS, // Vuetify overrides
+    icons: {
+      iconfont: 'mdiSvg'
+    },
+    defaultAssets: false,
+    theme: {
+      themes: {
+        light: {
+          primary: '#333399',
+          secondary: '#e10198',
+          accent: '#ff5722',
+          error: '#f44336',
+          warning: '#ffc107',
+          info: '#3f51b5',
+          success: '#4caf50'
+        }
       }
     }
   },

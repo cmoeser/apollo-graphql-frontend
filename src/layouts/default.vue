@@ -1,55 +1,54 @@
 <template>
   <div>
-    <nuxt />
+    <!-- Top Bar -->
+    <g-q-top-bar />
+    <!-- End Top Bar -->
+
+    <!-- Sub Header -->
+    <g-q-sub-header />
+    <!-- End Sub Header -->
+
+    <!-- Nav Drawer -->
+    <g-q-nav-drawer />
+    <!-- Nav Drawer -->
+
+    <!-- Main Content -->
+    <main-view role="main" />
+    <!-- End Main Content -->
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+// Core
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
+// Componnents
+import MainView from './MainView'
+import GQNavDrawer from '@/components/layout/GQNavDrawer'
+import GQTopBar from '@/components/layout/GQTopBar'
+import GQSubHeader from '@/components/layout/GQSubHeader'
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
+/**
+ *  @name - TvAdvancedSearchPanel
+ *
+ *  @desc -
+ *
+ *  @author Chip Moeser
+ *
+ * Wed May 26 10:36:05 EDT 2021
+ */
+@Component({
+  components: {
+    MainView,
+    GQNavDrawer,
+    GQTopBar,
+    GQSubHeader
+  }
+})
+export default class TvAdvancedSearchPanel extends Vue {}
+</script>
 
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
+<style lang="postcss">
+@import url('~/assets/css/styles.css');
 </style>

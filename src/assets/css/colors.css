@@ -1,4 +1,8 @@
 :root {
   /* Primary Pallete */
   --apollo-blue: rgb(51, 51, 153);
+
+  --apollo-pink-dark: rgb(225, 1, 152);
+
+  --white: rgb(225, 225, 225);
 }
