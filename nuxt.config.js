@@ -75,6 +75,58 @@ export default {
     buildDir: 'dist',
     cssSourceMap: true,
     optimizeCSS: false,
+    extractCSS: {
+      ignoreOrder: true
+    },
+    postcss: {
+      plugins: {
+        'postcss-preset-env': { stage: 1 },
+        'postcss-media-minmax': {},
+        'postcss-custom-media': {
+          importFrom: 'src/assets/css/grid_settings.css'
+        },
+        'postcss-import': {},
+        'postcss-apply': {},
+        'postcss-functions': {},
+        'postcss-custom-properties': {
+          importFrom: [
+            './src/assets/css/colors.css',
+            './src/assets/css/spacing.css'
+          ],
+          preserve: false
+        },
+        'postcss-mixins': {},
+        'postcss-nested': {},
+        'postcss-strip-inline-comments': {},
+        'postcss-clean': {},
+        'postcss-flexbugs-fixes': {},
+        autoprefixer: {},
+        cssnano: {}
+      },
+      order: [
+        'postcss-preset-env',
+        'postcss-media-minmax',
+        'postcss-custom-media',
+        'postcss-import',
+        'postcss-apply',
+        'postcss-functions',
+        'postcss-custom-properties',
+        'postcss-mixins',
+        'postcss-nested',
+        'postcss-strip-inline-comments',
+        'postcss-clean',
+        'postcss-flexbugs-fixes',
+        'autoprefixer',
+        'cssnano'
+      ],
+      preset: {
+        stage: 1,
+        autoprefixer: {
+          flexbox: true
+        }
+      }
+    },
+
     /*
      ** You can extend webpack config here
      */

@@ -1,0 +1,15 @@
+/**
+ *  Grid Settinga
+ *
+ *  @author Front End Dev @WKS
+ *  Small - 960 <
+ *  Medium -  > 961  < 1200 
+ *   Large - > 1201
+ *  Extra Large > 1600
+ *
+ *  Mon Aug 9 14:13:54 EDT 2021
+ */
+@custom-media --small-viewport (max-width: 60em);
+@custom-media --med-viewport (min-width: 60.0625em) and (max-width: 75em);
+@custom-media --large-viewport (width >=75.0625em);
+@custom-media --extra-large-viewport (width >=100em);

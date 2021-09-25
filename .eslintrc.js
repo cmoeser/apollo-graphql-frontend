@@ -19,7 +19,7 @@ module.exports = {
     'plugin:nuxt/recommended'
   ],
   plugins: ['prettier'],
-  ignorePatterns: ['static/', 'assets/'],
+  ignorePatterns: ['static/', 'assets/', '*.graphql'],
   // add your custom rules here
   rules: {
     'vue/comment-directive': 0,
@@ -79,5 +79,12 @@ module.exports = {
     'use-isnan': 'warn',
     'valid-typeof': 'off',
     camelcase: 'off'
-  }
+  },
+  overrides: [
+    {
+      files: ['*.graphql'],
+      parser: '@graphql-eslint/eslint-plugin',
+      plugins: ['@graphql-eslint']
+    }
+  ]
 }

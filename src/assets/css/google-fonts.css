@@ -1,0 +1,11 @@
+/* latin */
+@font-face {
+  font-family: 'robotoregular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Roboto'), local('Roboto-Regular'),
+    url(/assets/fonts/roboto-regular-webfont.ttf) format('truetype'),
+    url(/assets/fonts/roboto-regular-webfont.woff) format('woff'),
+    url(/assets/fonts/roboto-regular-webfont.woff2) format('woff2');
+}
