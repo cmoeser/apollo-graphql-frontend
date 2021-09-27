@@ -13,16 +13,26 @@
         <v-card flat>
           <v-card-text>
             REST API
-            {{ listings }}
-            <button>Get Listings</button>
+            <div>I want:</div>
+            <div>What I get:</div>
+            <g-q-response-size :response-data="responseData" />
+            <div v-if="listings">{{ listings[0] }}</div>
+
+            <v-btn @click="getListings()">Get Listings</v-btn>
           </v-card-text>
         </v-card>
       </v-tab-item>
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text>
-            Titles
+          <v-card-text v-if="listings">
+            <button
+              v-for="(listing, index) in listings"
+              :key="index"
+              @click="setTab(1)"
+            >
+              {{ listing.field_listing_title }}
+            </button>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -57,6 +67,9 @@ import { gql } from 'graphql-tag'
 // Extends
 import GQBasePage from '@/mixins/GQBasePage'
 
+// Components
+import GQResponseSize from '@/components/response/GQResponseSize'
+
 /**
  *  @name - GQOverPage
  *
@@ -66,7 +79,11 @@ import GQBasePage from '@/mixins/GQBasePage'
  *
  * Wed May 26 10:36:05 EDT 2021
  */
-@Component({})
+@Component({
+  components: {
+    GQResponseSize
+  }
+})
 export default class GQOverPage extends mixins(GQBasePage) {
   /*
    * @name -  name
@@ -74,22 +91,22 @@ export default class GQOverPage extends mixins(GQBasePage) {
    */
   name = 'Over Fetching'
 
-  tree = [
-    {
-      id: 0,
-      field_listing_title: 'Returned Query'
-    }
-  ]
-
   tab = 0
 
   items = ['REST API', 'Titles', 'Descriptions', 'Details']
 
-  listings = []
+  listings = {}
 
-  mounted() {
+  isOpen = false
+
+  item
+
+  responseSize = 0
+
+  responseData = []
+
+  getListings() {
     const clientApollo = this.$apolloProvider.defaultClient
-    console.log('Mounted :: ', clientApollo)
 
     return new Promise((resolve, reject) => {
       console.time()
@@ -111,13 +128,34 @@ export default class GQOverPage extends mixins(GQBasePage) {
           console.timeEnd()
           console.log('Listings', resp.data.listings)
           this.listings = resp.data.listings
-          console.log('THIS LISTINGS:: ', this.listings)
+          this.responseData = resp.data.listings
           resolve(resp)
         })
         .catch((err) => {
           resolve(err)
         })
     })
+  }
+
+  setTab(index) {
+    this.tab = index
+  }
+
+  toggle() {
+    if (this.isFolder) {
+      this.isOpen = !this.isOpen
+    }
+  }
+
+  makeFolder() {
+    if (!this.isFolder) {
+      this.$emit('make-folder', this.item)
+      this.isOpen = true
+    }
+  }
+
+  get isFolder() {
+    return this.item.children && this.item.children.length
   }
 }
 </script>
