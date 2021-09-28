@@ -26,13 +26,17 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text v-if="listings">
-            <button
-              v-for="(listing, index) in listings"
-              :key="index"
-              @click="setTab(1)"
-            >
-              {{ listing.field_listing_title }}
-            </button>
+            <div class="listing-wrapper">
+              <button
+                v-for="(listing, index) in listings"
+                :key="index"
+                @click="setTab(1)"
+              >
+                <div class="listing-titles">
+                  {{ listing.field_listing_title }}
+                </div>
+              </button>
+            </div>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -175,5 +179,12 @@ export default class GQOverPage extends mixins(GQBasePage) {
 .theme--light.v-tabs > .v-tabs-bar .v-tab--disabled,
 .theme--light.v-tabs > .v-tabs-bar .v-tab:not(.v-tab--active) {
   color: var(--white);
+}
+
+.listing-wrapper {
+  max-height: 500px;
+  text-align: left;
+  overflow-y: scroll;
+  padding: 0 var(--space-lg);
 }
 </style>
