@@ -15,6 +15,8 @@ export default (ctx) => {
     uri: process.env.nuxtApiUrl
   })
 
+  console.log('process.env.nuxtApiUrl ', httpLink)
+
   const link = from([ssrMiddleware, httpLink])
   const cache = new InMemoryCache()
 

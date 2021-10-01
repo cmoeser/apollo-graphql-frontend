@@ -38,6 +38,7 @@
               </button>
             </div>
           </v-card-text>
+          <v-btn @click="getListing('746')">Get Listings</v-btn>
         </v-card>
       </v-tab-item>
 
@@ -131,6 +132,36 @@ export default class GQOverPage extends mixins(GQBasePage) {
         .then((resp) => {
           console.timeEnd()
           console.log('Listings', resp.data.listings)
+          this.listings = resp.data.listings
+          this.responseData = resp.data.listings
+          resolve(resp)
+        })
+        .catch((err) => {
+          resolve(err)
+        })
+    })
+  }
+
+  getListing(nid) {
+    const clientApollo = this.$apolloProvider.defaultClient
+
+    return new Promise((resolve, reject) => {
+      console.time()
+      clientApollo
+        .query({
+          query: gql`
+            query queryAsociated($nid: ID!) {
+              getAssociated(nid: $nid) {
+                title
+              }
+            }
+          `,
+
+          variables: { $nid: '746' }
+        })
+        .then((resp) => {
+          console.timeEnd()
+          console.log('Listing', resp.data.listings)
           this.listings = resp.data.listings
           this.responseData = resp.data.listings
           resolve(resp)
