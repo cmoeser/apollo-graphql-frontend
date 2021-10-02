@@ -11,24 +11,80 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
 @Module({
   stateFactory: true,
   namespaced: true,
-  name: 'appState'
+  name: 'missionControlState',
 })
-export default class AppModule extends VuexModule {
+export default class MissionControlModule extends VuexModule {
   /*
-   * @name -  setRequestSize
+   * @name -  setresponseSize
    * @descrition -
    * @decorator - @Mutation
    * @type - Mutation<T>
    * @arguments - people - The array of people objects
    */
   @Mutation
-  setRequestSize(requestSize) {
-    this.requestSize = requestSize
+  setResponseSize(responseSize) {
+    this.responseSize = responseSize
   }
 
   /*
-   * @name - requestSize
+   * @name -  requestStart
+   * @descrition -
+   * @decorator - @Mutation
+   * @type - Mutation<T>
+   * @arguments - people - The array of people objects
+   */
+  @Mutation
+  setRequestStart(requestStart) {
+    console.log('SET START: ', requestStart)
+    this.requestStart = requestStart
+  }
+
+  /*
+   * @name -   requestFinish
+   * @descrition -
+   * @decorator - @Mutation
+   * @type - Mutation<T>
+   * @arguments - people - The array of people objects
+   */
+  @Mutation
+  setRequestFinish(requestFinish) {
+    console.log('SET FINISH: ', requestFinish)
+    this.requestFinish = requestFinish
+  }
+
+  /*
+   * @name -  requestTotal
+   * @descrition -
+   * @decorator - @Mutation
+   * @type - Mutation<T>
+   * @arguments - people - The array of people objects
+   */
+  @Mutation
+  setRequestTotal(requestTotal) {
+    this.requestTotal = requestTotal
+  }
+
+  /*
+   * @name - responseSize
    * @descrition -
    */
-  requestSize = ''
+  responseSize = ''
+
+  /*
+   * @name - requestStart
+   * @descrition -
+   */
+  requestStart = ''
+
+  /*
+   * @name - requestFinish
+   * @descrition -
+   */
+  requestFinish = ''
+
+  /*
+   * @name - requestTotal
+   * @descrition -
+   */
+  requestTotal = ''
 }

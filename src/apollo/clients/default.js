@@ -7,12 +7,12 @@ export default (ctx) => {
   const ssrMiddleware = setContext((_, { headers }) => {
     if (process.client) return headers
     return {
-      headers
+      headers,
     }
   })
 
   const httpLink = new HttpLink({
-    uri: process.env.nuxtApiUrl
+    uri: process.env.nuxtApiUrl,
   })
 
   const link = from([ssrMiddleware, httpLink])
@@ -21,6 +21,6 @@ export default (ctx) => {
   return {
     link,
     cache,
-    defaultHttpLink: false
+    defaultHttpLink: false,
   }
 }

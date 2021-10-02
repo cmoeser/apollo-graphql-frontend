@@ -23,9 +23,9 @@ import { roughSizeOfObject } from '@/util/util'
   props: {
     responseData: {
       type: Array,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 })
 export default class GQResponseSize extends Vue {
   /*
@@ -48,8 +48,8 @@ export default class GQResponseSize extends Vue {
       },
       {
         deep: true,
-        immediate: true
-      }
+        immediate: true,
+      },
     )
   }
 
@@ -61,8 +61,8 @@ export default class GQResponseSize extends Vue {
     const kiloBytes = this.responseData / 1024
     const megaBytes = kiloBytes / 1024
     this.$store.commit(
-      'requestState/setResponseSize',
-      `${roughSizeOfObject(megaBytes)}MB`
+      'missionControlState/setResponseSize',
+      `${roughSizeOfObject(megaBytes)}MB`,
     )
   }
 }

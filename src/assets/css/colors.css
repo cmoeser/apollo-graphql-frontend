@@ -3,10 +3,12 @@
   --apollo-blue: rgb(51, 51, 153);
 
   --apollo-pink-dark: rgb(225, 1, 152);
+  --apollo-pink-transparent: rgba(225, 1, 152, 0.2);
 
   --node-green-dark: rgb(2, 110, 0);
 
   --white: rgb(255, 255, 255);
-  --white-transparent: rgba(255, 255, 255, 0.4);
+  --white-transparent: rgba(255, 255, 255, 0.3);
+  --white-transparent-six: rgba(255, 255, 255, 0.6);
   --black: rgb(0, 0, 0);
 }

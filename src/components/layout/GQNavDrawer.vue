@@ -40,6 +40,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/over" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">O</div>
 
           <div class="nav-text">Over Fetching</div>
@@ -48,6 +49,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/under" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">U</div>
 
           <div class="nav-text">Under Fetching</div>
@@ -56,6 +58,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/directives" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">D</div>
 
           <div class="nav-text">Directives</div>
@@ -64,6 +67,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/caching" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">C</div>
 
           <div class="nav-text">Caching&nbsp;&nbsp;&nbsp;</div>
@@ -72,6 +76,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/persisted" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">P</div>
 
           <div class="nav-text">Persisted&nbsp;</div>
@@ -80,6 +85,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/subscriptions" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">S</div>
 
           <div class="nav-text">Subscriptions</div>
@@ -88,6 +94,7 @@
 
       <v-list-item link class="gq-menu-item">
         <nuxt-link to="/multiple" class="nuxt-link">
+          <div class="nav-icon-bg" />
           <div class="nav-icon">M</div>
 
           <div class="nav-text">Multiple Data Sources</div>
@@ -170,6 +177,9 @@ export default class GQNavDrawer extends Vue {
   display: flex;
   flex: 1 1 60%;
   padding-left: var(--space-sm);
+  background-color: var(--white);
+  align-items: center;
+  border-bottom: 1px solid var(--apollo-pink-transparent);
 }
 
 .nuxt-link {
@@ -179,6 +189,8 @@ export default class GQNavDrawer extends Vue {
   flex: 1 0 auto;
   text-decoration: none;
   align-items: center;
+  background-color: var(--apollo-pink-dark);
+  align-items: stretch;
 }
 
 .nav-icon {
@@ -189,10 +201,33 @@ export default class GQNavDrawer extends Vue {
   flex: 0 0 40%;
   justify-content: center;
   align-items: center;
-  background-color: var(--apollo-pink-dark);
+  position: relative;
+  z-index: 3;
   color: var(--white);
   font-weight: bold;
   font-size: 1.6rem;
   border-bottom: 1px solid var(--white);
+}
+
+.nuxt-link.nuxt-link-exact-active.nuxt-link-active .nav-icon {
+  color: var(--node-green-dark);
+}
+
+.nav-icon-bg-temp {
+  height: 34px;
+  left: 11px;
+  top: 2px;
+  width: 34px;
+  margin-bottom: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: var(--white-transparent);
+  position: absolute;
+  border: 1px solid var(--white);
+}
+
+.nuxt-link.nuxt-link-exact-active.nuxt-link-active .nav-icon-bg-temp {
+  background-color: var(--white-transparent-six);
 }
 </style>

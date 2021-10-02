@@ -17,7 +17,7 @@
       <!-- End Main Content -->
 
       <!-- Mission Control -->
-      <g-q-mission-control />
+      <g-q-mission-control v-if="$route.path !== '/'" />
       <!-- Mission Control -->
     </div>
   </div>
@@ -50,8 +50,8 @@ import GQMissionControl from '@/components/mission-control/GQMissionControl'
     GQNavDrawer,
     GQTopBar,
     GQSubHeader,
-    GQMissionControl
-  }
+    GQMissionControl,
+  },
 })
 export default class TvAdvancedSearchPanel extends Vue {}
 </script>

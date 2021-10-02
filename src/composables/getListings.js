@@ -6,7 +6,7 @@ const getList = async (obj) => {
   const data = await obj.axios
     .post(
       `/LobbyGuard/GetList?paging.pageIndex=${obj.paging.index}&paging.numberOfRows=${obj.paging.numberOfRows}`,
-      obj.params
+      obj.params,
     )
     .catch((error) => {
       console.log('getList API error: ', error)

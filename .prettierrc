@@ -4,5 +4,6 @@
   "singleQuote": true,
   "preferVoidTags": true,
   "endOfLine": "auto",
-  "failOnError": false
+  "failOnError": false,
+  "trailingComma": "all"
 }

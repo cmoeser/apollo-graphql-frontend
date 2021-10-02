@@ -27,7 +27,7 @@ import Component from 'vue-class-component'
  * Wed May 26 10:36:05 EDT 2021
  */
 @Component({
-  components: {}
+  components: {},
 })
 export default class MainView extends Vue {}
 </script>

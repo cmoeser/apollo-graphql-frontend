@@ -38,6 +38,8 @@
     "graphql": "^15.6.0",
     "isomorphic-fetch": "^3.0.0",
     "nuxt": "^2.15.8",
+    "material-design-icons": "^3.0.1",
+    "perf_hooks": "^0.0.1",
     "postcss-apply": "^0.12.0",
     "postcss-clean": "^1.2.2",
     "postcss-custom-media": "^8.0.0",

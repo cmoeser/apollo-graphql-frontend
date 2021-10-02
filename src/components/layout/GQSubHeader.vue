@@ -3,9 +3,6 @@
     <div class="gq-sub-header__text">
       {{ subHeaderText }}
     </div>
-    <div class="gq-sub-header__response-size">
-      response size: <span> {{ responseSize }} </span>
-    </div>
   </v-subheader>
 </template>
 
@@ -37,16 +34,6 @@ export default class GQSubHeader extends Vue {
    */
   @State('subHeaderText', { namespace: 'headerState' })
   subHeaderText
-
-  /*
-   * @name -
-   * @descrition -
-   * @decorator - @State
-   * @type - Sate<T>
-   * @param - namespace: string -
-   */
-  @State('responseSize', { namespace: 'requestState' })
-  responseSize
 }
 </script>
 
@@ -69,13 +56,5 @@ export default class GQSubHeader extends Vue {
   font-weight: bold;
   margin-left: var(--space-xxg);
   margin: 0 auto;
-}
-
-.gq-sub-header__response-size {
-  color: var(--white);
-}
-
-.gq-sub-header__response-size span {
-  font-weight: bold;
 }
 </style>

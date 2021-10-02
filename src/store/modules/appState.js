@@ -11,7 +11,7 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
 @Module({
   stateFactory: true,
   namespaced: true,
-  name: 'appState'
+  name: 'appState',
 })
 export default class AppModule extends VuexModule {
   /*

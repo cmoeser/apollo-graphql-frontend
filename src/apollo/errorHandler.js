@@ -1,6 +1,6 @@
 export default (
   { graphQLErrors, networkError, operation, forward },
-  nuxtContext
+  nuxtContext,
 ) => {
   console.log('Global error handler')
   console.log(graphQLErrors, networkError, operation, forward)

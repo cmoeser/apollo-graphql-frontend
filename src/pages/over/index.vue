@@ -44,17 +44,13 @@
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text>
-            Descriptions
-          </v-card-text>
+          <v-card-text> Descriptions </v-card-text>
         </v-card>
       </v-tab-item>
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text>
-            Details
-          </v-card-text>
+          <v-card-text> Details </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -86,8 +82,8 @@ import GQResponseSize from '@/components/response/GQResponseSize'
  */
 @Component({
   components: {
-    GQResponseSize
-  }
+    GQResponseSize,
+  },
 })
 export default class GQOverPage extends mixins(GQBasePage) {
   /*
@@ -114,7 +110,13 @@ export default class GQOverPage extends mixins(GQBasePage) {
     const clientApollo = this.$apolloProvider.defaultClient
 
     return new Promise((resolve, reject) => {
-      console.time()
+      const startTime = new Date('2015-03-25T12:00:00Z')
+
+      this.$store.commit(
+        'missionControlState/setRequestStart',
+        startTime.getTime(),
+      )
+
       clientApollo
         .query({
           query: gql`
@@ -127,11 +129,16 @@ export default class GQOverPage extends mixins(GQBasePage) {
                 listing_dates
               }
             }
-          `
+          `,
         })
         .then((resp) => {
-          console.timeEnd()
-          console.log('Listings', resp.data.listings)
+          const endTime = new Date('2015-03-25T12:00:00Z')
+          this.$store.commit(
+            'missionControlState/setRequestFinish',
+            Math.floor((endTime.getTime() / 1000) % 60),
+          )
+
+          console.log('Listings', resp)
           this.listings = resp.data.listings
           this.responseData = resp.data.listings
           resolve(resp)
@@ -157,7 +164,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
             }
           `,
 
-          variables: { $nid: '746' }
+          variables: { $nid: '746' },
         })
         .then((resp) => {
           console.timeEnd()
