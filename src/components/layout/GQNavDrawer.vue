@@ -2,7 +2,7 @@
   <v-navigation-drawer
     permanent
     :mini-variant="menuMini"
-    :width="400"
+    :width="260"
     style="top: 72px"
   >
     <v-list>

@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="gq-content">
     <v-responsive class="mx-auto overflow-visible">
       <v-container>
         <v-responsive class="overflow-visible" min-height="80vh">

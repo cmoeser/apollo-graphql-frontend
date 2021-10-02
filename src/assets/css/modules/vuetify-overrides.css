@@ -1,3 +1,9 @@
+.gq-content {
+  display: flex;
+  flex: 1 1 70%;
+}
+
+
 .v-navigation-drawer {
   position: absolute;
   z-index: 101;

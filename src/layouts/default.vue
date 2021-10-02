@@ -11,10 +11,15 @@
     <!-- Nav Drawer -->
     <g-q-nav-drawer />
     <!-- Nav Drawer -->
+    <div class="gq-content-wrapper">
+      <!-- Main Content -->
+      <main-view role="main" />
+      <!-- End Main Content -->
 
-    <!-- Main Content -->
-    <main-view role="main" />
-    <!-- End Main Content -->
+      <!-- Mission Control -->
+      <g-q-mission-control />
+      <!-- Mission Control -->
+    </div>
   </div>
 </template>
 
@@ -28,6 +33,7 @@ import MainView from './MainView'
 import GQNavDrawer from '@/components/layout/GQNavDrawer'
 import GQTopBar from '@/components/layout/GQTopBar'
 import GQSubHeader from '@/components/layout/GQSubHeader'
+import GQMissionControl from '@/components/mission-control/GQMissionControl'
 
 /**
  *  @name - TvAdvancedSearchPanel
@@ -43,7 +49,8 @@ import GQSubHeader from '@/components/layout/GQSubHeader'
     MainView,
     GQNavDrawer,
     GQTopBar,
-    GQSubHeader
+    GQSubHeader,
+    GQMissionControl
   }
 })
 export default class TvAdvancedSearchPanel extends Vue {}
@@ -51,4 +58,11 @@ export default class TvAdvancedSearchPanel extends Vue {}
 
 <style lang="postcss">
 @import url('~/assets/css/styles.css');
+
+.gq-content-wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: row;
+  margin: 0 var(--space-xxl);
+}
 </style>

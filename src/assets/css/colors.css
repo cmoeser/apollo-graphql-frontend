@@ -4,6 +4,9 @@
 
   --apollo-pink-dark: rgb(225, 1, 152);
 
+  --node-green-dark: rgb(2, 110, 0);
+
   --white: rgb(255, 255, 255);
+  --white-transparent: rgba(255, 255, 255, 0.4);
   --black: rgb(0, 0, 0);
 }

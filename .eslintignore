@@ -1,0 +1,9 @@
+src/mixins/visitor/TvWebSocketBase.js
+src/mixins/visitor/TvVisitorBase.js
+src/mixins/visitor/TvReturnCard.js
+src/mixins/visitor/TvUnscheuledVisitorSponsorBase.js
+src/mixins/visitor/TvBadgeTemplateBase.js
+src/mixins/visitor/TvBadgeManagementBase.js
+src/mixins/visitor/TvLobbyBase.js
+*.spec.*
+*.mock.*
