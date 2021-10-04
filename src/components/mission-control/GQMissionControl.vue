@@ -3,9 +3,6 @@
     <div class="gq-mission-control-header">Mission Control</div>
     <div class="gq-mission-control-content-wrapper">
       <div class="gq-mission-control-content-item">
-        Response Size: <span> {{ responseSize }} </span>
-      </div>
-      <div class="gq-mission-control-content-item">
         Request Start: <span>{{ requestStart }}</span>
       </div>
       <div class="gq-mission-control-content-item">
@@ -15,8 +12,12 @@
         Request Total: <span>{{ requestTotal }}</span>
       </div>
       <div class="gq-mission-control-content-item">
+        Response Size: <span> {{ responseSize }} </span>
+      </div>
+      <div class="gq-mission-control-content-item">
         Request End Point(s): <span>{{ requestTotal }}</span>
       </div>
+      <div class="gq-mission-control-content-item">Cached: <span></span></div>
     </div>
   </div>
 </template>

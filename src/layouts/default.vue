@@ -17,7 +17,7 @@
       <!-- End Main Content -->
 
       <!-- Mission Control -->
-      <g-q-mission-control v-if="$route.path !== '/'" />
+      <g-q-mission-control />
       <!-- Mission Control -->
     </div>
   </div>

@@ -227,7 +227,17 @@ export default class GQNavDrawer extends Vue {
   border: 1px solid var(--white);
 }
 
-.nuxt-link.nuxt-link-exact-active.nuxt-link-active .nav-icon-bg-temp {
+.nuxt-link.nuxt-link-exact-active.nuxt-link-active .nav-icon-bg {
+  height: 34px;
+  left: 11px;
+  top: 2px;
+  width: 34px;
+  margin-bottom: 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  border: 1px solid var(--white);
   background-color: var(--white-transparent-six);
 }
 </style>

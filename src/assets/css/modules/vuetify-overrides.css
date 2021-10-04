@@ -3,7 +3,6 @@
   flex: 1 1 70%;
 }
 
-
 .v-navigation-drawer {
   position: absolute;
   z-index: 101;
@@ -19,4 +18,8 @@
   overflow: hidden;
   background-image: url('/images/apollo_graphql.png');
   background-position: center center;
+}
+
+.v-tab:before {
+  background-color: var(--apollo-pink-dark);
 }
