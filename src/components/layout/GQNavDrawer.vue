@@ -237,7 +237,7 @@ export default class GQNavDrawer extends Vue {
   border-radius: 50%;
   display: inline-block;
   position: absolute;
-  border: 1px solid var(--white);
+  border: 1px solid var(--white-transparent-six);
   background-color: var(--white-transparent-six);
 }
 </style>

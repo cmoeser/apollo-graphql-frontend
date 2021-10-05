@@ -91,7 +91,7 @@ export default class GQMissionControl extends Vue {
   flex-direction: column;
   border: 1px solid var(--white-transparent);
   background-color: var(--node-green-dark);
-  margin: 130px var(--space-md) 0 0;
+  margin: 124px var(--space-md) 0 0;
 }
 
 .gq-mission-control-header {
@@ -100,9 +100,9 @@ export default class GQMissionControl extends Vue {
   font-weight: bold;
   background-color: var(--white-transparent);
   width: 100%;
-  height: 40px;
+  height: 34px;
   text-align: center;
-  padding-top: var(--space-xs);
+  padding-top: 6px;
 }
 
 .gq-mission-control-content-wrapper {

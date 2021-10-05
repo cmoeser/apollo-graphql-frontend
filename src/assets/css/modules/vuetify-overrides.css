@@ -8,6 +8,11 @@
   z-index: 101;
 }
 
+.theme--light.v-card > .v-card__text,
+.theme--light.v-card > .v-card__subtitle {
+  color: var(--black) !important;
+}
+
 .v-sheet.theme--dark.v-toolbar.v-toolbar--prominent {
   background-color: var(--apollo-blue);
   position: absolute;
@@ -20,6 +25,6 @@
   background-position: center center;
 }
 
-.v-tab:before {
-  background-color: var(--apollo-pink-dark);
+.v-tabs-slider {
+  color: var(--apollo-pink-dark);
 }

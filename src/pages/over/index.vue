@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tabs v-model="tab" centered>
+    <v-tabs v-model="tab" centered slider-size="6">
       <v-tabs-slider color="yellow"></v-tabs-slider>
 
       <v-tab v-for="item in items" :key="item">
@@ -12,13 +12,39 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text>
-            REST API
-            <div>I want:</div>
-            <div>What I get:</div>
-            <g-q-response-size :response-data="responseData" />
-            <div v-if="listings">{{ listings[0] }}</div>
+            <div class="info-box">
+              <div class="info-text">
+                <p class="info-text-title">Scenario:</p>
 
-            <v-btn @click="getListings()">Get Listings</v-btn>
+                <p class="info-text-p">
+                  <span>Manager:&nbsp;</span>
+                  I would like you to create a list of listing
+                  <em>titles &amp; summary's</em>. It will be displayed on our
+                  home page.
+                </p>
+                <p class="info-text-p">
+                  <span>API Developer:&nbsp;</span>
+                  We don't have the bandwith for a new endpoint, you'll have to
+                  use the existing listings API endpoint we use for all other
+                  listings requirements at /listings.
+                </p>
+              </div>
+              <div class="info-text">
+                <p class="info-text-title">What I want:&nbsp;</p>
+                <p>
+                  field_listing_title<br />
+                  field_listing_desc_1
+                </p>
+              </div>
+              <div class="info-text">
+                <p class="info-text-title">What I get:&nbsp;</p>
+                <g-q-response-size :response-data="responseData" />
+                <div v-if="listings">{{ listings[0] }}</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <v-btn @click="getListings()">Get Listings</v-btn>
+            </div>
           </v-card-text>
         </v-card>
       </v-tab-item>
@@ -125,6 +151,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
                 id
                 field_listing_title
                 field_listing_desc
+                field_listing_desc_1
                 listing_additional_info
                 listing_dates
               }
@@ -203,8 +230,55 @@ export default class GQOverPage extends mixins(GQBasePage) {
 </script>
 
 <style>
-.v-tabs.theme--light {
-  margin-top: 33px;
+.info-row {
+  display: flex;
+  flex-direction: row;
+  padding: var(--space-sm) 0;
+  justify-content: flex-end;
+  margin-top: var(--space-md);
+  border-top: 1px solid var(--extra-light-grey);
+}
+
+.info-box {
+  display: flex;
+  flex-direction: row;
+  padding-top: var(--space-sm);
+}
+
+.info-text {
+  max-height: 400px;
+  overflow-y: auto;
+  flex: 1 1 33%;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--extra-light-grey);
+  border-radius: 16px;
+  margin: 0 var(--space-md);
+}
+
+.info-text em {
+  font-weight: bold;
+  color: var(--apollo-pink-dark);
+}
+
+.info-text p {
+  text-align: left;
+  margin-bottom: var(--space-sm);
+}
+
+.info-text-p {
+  font-size: 1rem;
+}
+
+.info-text span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: var(--space-xxs);
+  font-size: 1rem;
+}
+
+.info-text-title {
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .theme--light.v-tabs > .v-tabs-bar {
