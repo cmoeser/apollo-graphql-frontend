@@ -2,7 +2,7 @@ const prodCSS =
   process.env.NODE_ENV === 'production' ? ['~/assets/css/styles.css'] : []
 
 export default {
-  mode: 'spa',
+  ssr: false,
   srcDir: 'src/',
   ssr: false,
   components: false,
@@ -17,10 +17,10 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+        content: process.env.npm_package_description || '',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   /*
    ** Customize the progress-bar color
@@ -41,7 +41,7 @@ export default {
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
     '@nuxtjs/google-fonts',
-    'nuxt-material-design-icons'
+    'nuxt-material-design-icons',
   ],
   /*
    ** Nuxt.js modules
@@ -53,9 +53,9 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'http://localhost:4000/graphql'
-      }
-    }
+        httpEndpoint: 'http://localhost:4000/graphql',
+      },
+    },
   },
   googleFonts: {
     families: {
@@ -64,9 +64,9 @@ export default {
       Lato: [100, 300],
       Raleway: {
         wght: [100, 400],
-        ital: [100]
-      }
-    }
+        ital: [100],
+      },
+    },
   },
   /*
    ** vuetify module configuration
@@ -76,7 +76,7 @@ export default {
     treeShake: true,
     customVariables: prodCSS, // Vuetify overrides
     icons: {
-      iconfont: 'mdiSvg'
+      iconfont: 'mdiSvg',
     },
     defaultAssets: false,
     theme: {
@@ -88,10 +88,10 @@ export default {
           error: '#f44336',
           warning: '#ffc107',
           info: '#3f51b5',
-          success: '#4caf50'
-        }
-      }
-    }
+          success: '#4caf50',
+        },
+      },
+    },
   },
   /*
    ** Build configuration
@@ -102,29 +102,29 @@ export default {
       cache: false,
       sourceMap: false,
       extractComments: {
-        filename: 'LICENSES'
+        filename: 'LICENSES',
       },
       terserOptions: {
         compress: {
-          drop_console: process.env.NODE_ENV === 'production'
+          drop_console: process.env.NODE_ENV === 'production',
         },
         output: {
-          comments: /^\**!|@preserve|@license|@cc_on/
-        }
-      }
+          comments: /^\**!|@preserve|@license|@cc_on/,
+        },
+      },
     },
     buildDir: 'dist',
     cssSourceMap: true,
     optimizeCSS: false,
     extractCSS: {
-      ignoreOrder: true
+      ignoreOrder: true,
     },
     postcss: {
       plugins: {
         'postcss-preset-env': { stage: 1 },
         'postcss-media-minmax': {},
         'postcss-custom-media': {
-          importFrom: 'src/assets/css/grid_settings.css'
+          importFrom: 'src/assets/css/grid_settings.css',
         },
         'postcss-import': {},
         'postcss-apply': {},
@@ -132,9 +132,9 @@ export default {
         'postcss-custom-properties': {
           importFrom: [
             './src/assets/css/colors.css',
-            './src/assets/css/spacing.css'
+            './src/assets/css/spacing.css',
           ],
-          preserve: false
+          preserve: false,
         },
         'postcss-mixins': {},
         'postcss-nested': {},
@@ -142,7 +142,7 @@ export default {
         'postcss-clean': {},
         'postcss-flexbugs-fixes': {},
         autoprefixer: {},
-        cssnano: {}
+        cssnano: {},
       },
       order: [
         'postcss-preset-env',
@@ -158,19 +158,19 @@ export default {
         'postcss-clean',
         'postcss-flexbugs-fixes',
         'autoprefixer',
-        'cssnano'
+        'cssnano',
       ],
       preset: {
         stage: 1,
         autoprefixer: {
-          flexbox: true
-        }
-      }
+          flexbox: true,
+        },
+      },
     },
 
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
-  }
+    extend(config, ctx) {},
+  },
 }

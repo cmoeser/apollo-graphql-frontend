@@ -39,7 +39,7 @@
               <div class="info-text">
                 <p class="info-text-title">What I get:&nbsp;</p>
                 <g-q-response-size :response-data="responseData" />
-                <div v-if="listings">{{ listings[0] }}</div>
+                <div v-if="responseData.length > 0">{{ responseData[0] }}</div>
               </div>
             </div>
             <div class="info-row">
@@ -168,6 +168,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
           console.log('Listings', resp)
           this.listings = resp.data.listings
           this.responseData = resp.data.listings
+          console.log('DES:: ', this.responseData)
           resolve(resp)
         })
         .catch((err) => {
@@ -208,23 +209,6 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   setTab(index) {
     this.tab = index
-  }
-
-  toggle() {
-    if (this.isFolder) {
-      this.isOpen = !this.isOpen
-    }
-  }
-
-  makeFolder() {
-    if (!this.isFolder) {
-      this.$emit('make-folder', this.item)
-      this.isOpen = true
-    }
-  }
-
-  get isFolder() {
-    return this.item.children && this.item.children.length
   }
 }
 </script>
