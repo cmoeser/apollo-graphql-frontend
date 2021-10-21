@@ -74,7 +74,7 @@ export default {
    */
   vuetify: {
     treeShake: true,
-    customVariables: prodCSS, // Vuetify overrides
+    // customVariables: prodCSS, // Vuetify overrides
     icons: {
       iconfont: 'mdiSvg',
     },
