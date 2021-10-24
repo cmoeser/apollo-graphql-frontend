@@ -136,13 +136,6 @@ export default class GQOverPage extends mixins(GQBasePage) {
     const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
 
     return new Promise((resolve, reject) => {
-      const startTime = new Date('2015-03-25T12:00:00Z')
-
-      this.$store.commit(
-        'missionControlState/setRequestStart',
-        startTime.getTime(),
-      )
-
       clientApollo
         .query({
           query: gql`
@@ -159,16 +152,13 @@ export default class GQOverPage extends mixins(GQBasePage) {
           `,
         })
         .then((resp) => {
-          const endTime = new Date('2015-03-25T12:00:00Z')
-          this.$store.commit(
-            'missionControlState/setRequestFinish',
-            Math.floor((endTime.getTime() / 1000) % 60),
-          )
+          console.log('RESPONSE:: ', resp)
+          console.log('TIME:: ', resp.timing)
 
-          console.log('Listings', resp)
           this.listings = resp.data.listings
           this.responseData = resp.data.listings
           console.log('DES:: ', this.responseData)
+
           resolve(resp)
         })
         .catch((err) => {
@@ -197,6 +187,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
         .then((resp) => {
           console.timeEnd()
           console.log('Listing', resp.data.listings)
+          console.log('TIME:: ', this.resp.timing)
           this.listings = resp.data.listings
           this.responseData = resp.data.listings
           resolve(resp)
