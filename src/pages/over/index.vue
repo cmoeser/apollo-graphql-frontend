@@ -52,31 +52,9 @@
       <v-tab-item>
         <v-card flat>
           <v-card-text v-if="listings">
-            <div class="listing-wrapper">
-              <button
-                v-for="(listing, index) in listings"
-                :key="index"
-                @click="setTab(1)"
-              >
-                <div class="listing-titles">
-                  {{ listing.field_listing_title }}
-                </div>
-              </button>
-            </div>
+            <div class="listing-wrapper">gfdgf</div>
           </v-card-text>
           <v-btn @click="getListing('746')">Get Listings</v-btn>
-        </v-card>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text> Descriptions </v-card-text>
-        </v-card>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text> Details </v-card-text>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -90,6 +68,7 @@ import Component, { mixins } from 'vue-class-component'
 // Grpahql
 import { gql } from 'graphql-tag'
 // import listingsGQL from '@/apollo/queries/listings.gql'
+import graphqlClient from '@/apollo/clients/default'
 
 // Extends
 import GQBasePage from '@/mixins/GQBasePage'
@@ -120,7 +99,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   tab = 0
 
-  items = ['REST API', 'Titles', 'Descriptions', 'Details']
+  items = ['REST API', 'GraphQL']
 
   listings = {}
 
@@ -133,7 +112,28 @@ export default class GQOverPage extends mixins(GQBasePage) {
   responseData = []
 
   getListings() {
-    const clientApollo = this.$apolloProvider.defaultClient
+    /*
+    const timeStartLink = new ApolloLink((operation, forward) => {
+      operation.setContext({ start: performance.now() })
+      return forward(operation)
+    })
+
+    const logTimeLink = new ApolloLink((operation, forward) =>
+      forward(operation).map((data) => {
+        // data from a previous link
+        const time = performance.now() - operation.getContext().start
+        console.log(
+          `operation ${operation.operationName} took ${time} to complete`,
+        )
+        return data
+      }),
+    )
+
+    const link = timeStartLink.concat(logTimeLink)
+    console.log('LINK:: ', link)
+    */
+
+    const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
 
     return new Promise((resolve, reject) => {
       const startTime = new Date('2015-03-25T12:00:00Z')

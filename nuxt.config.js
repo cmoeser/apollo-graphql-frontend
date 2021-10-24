@@ -17,7 +17,7 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || '',
+        content: process.env.npm_package_description || 'What APpolo Can Do',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
@@ -33,7 +33,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/apollo-client.js'],
+  plugins: [],
   /*
    ** Nuxt.js dev-modules
    */
