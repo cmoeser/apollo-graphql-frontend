@@ -30,8 +30,8 @@ const httpLink = new HttpLink({
   uri: 'http://localhost:4000/graphql',
 })
 
-const afterwareLink = new ApolloLink((operation, forward) => {
-  return forward(operation).map((response) => {
+const afterwareLink = new ApolloLink((operation, forward) =>
+  forward(operation).map((response) => {
     const context = operation.getContext()
     const {
       response: { headers },
@@ -42,8 +42,8 @@ const afterwareLink = new ApolloLink((operation, forward) => {
     }
 
     return response
-  })
-})
+  }),
+)
 
 const setHeaders = setContext((_request, { headers }) => ({
   headers: {
