@@ -32,6 +32,7 @@
               <div class="info-text">
                 <p class="info-text-title">What I want:&nbsp;</p>
                 <p>
+                  id<br />
                   field_listing_title<br />
                   field_listing_desc_1
                 </p>
@@ -39,7 +40,13 @@
               <div class="info-text">
                 <p class="info-text-title">What I get:&nbsp;</p>
                 <g-q-response-size :response-data="responseData" />
-                <div v-if="responseData.length > 0">{{ responseData[0] }}</div>
+                <div v-if="responseData.length > 0">
+                  <div v-for="(value, key) in responseData[0]" :key="key">
+                    <strong>{{ key }}</strong
+                    ><br />
+                    {{ value }}
+                  </div>
+                </div>
               </div>
             </div>
             <div class="info-row">
@@ -112,6 +119,32 @@ export default class GQOverPage extends mixins(GQBasePage) {
   responseData = []
 
   getListings() {
+    const markerNameA = 'example-marker-a'
+    const markerNameB = 'example-marker-b'
+
+    // Run some nested timeouts, and create a PerformanceMark for each.
+    performance.mark(markerNameA)
+    setTimeout(() => {
+      performance.mark(markerNameB)
+      setTimeout(() => {
+        // Create a variety of measurements.
+        performance.measure('measure a to b', markerNameA, markerNameB)
+        performance.measure('measure a to now', markerNameA)
+        performance.measure(
+          'measure from navigation start to b',
+          undefined,
+          markerNameB,
+        )
+        performance.measure('measure from navigation start to now')
+
+        // Pull out all of the measurements.
+        console.log(performance.getEntriesByType('measure'))
+
+        // Finally, clean up the entries.
+        performance.clearMarks()
+        performance.clearMeasures()
+      }, 1000)
+    }, 1000)
     /*
     const timeStartLink = new ApolloLink((operation, forward) => {
       operation.setContext({ start: performance.now() })
@@ -147,6 +180,8 @@ export default class GQOverPage extends mixins(GQBasePage) {
                 field_listing_desc_1
                 listing_additional_info
                 listing_dates
+                field_image
+                field_thumbnail
               }
             }
           `,
