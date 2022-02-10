@@ -15,6 +15,7 @@
     "@nuxtjs/apollo": "^4.0.1-rc.5",
     "@nuxtjs/pwa": "^3.0.0-0",
     "apollo-link-context": "^1.0.20",
+    "crypto-hash": "^2.0.1",
     "graphql-tag": "^2.12.5"
   },
   "devDependencies": {
@@ -38,6 +39,7 @@
     "graphql": "^15.6.0",
     "install": "^0.13.0",
     "isomorphic-fetch": "^3.0.0",
+    "js-sha256": "^0.9.0",
     "material-design-icons": "^3.0.1",
     "npm": "^8.0.0",
     "nuxt": "^2.15.8",

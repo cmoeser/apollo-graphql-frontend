@@ -27,16 +27,29 @@ export default class MissionControlModule extends VuexModule {
   }
 
   /*
-   * @name -  requestStart
+   * @name -  setRequestCached
    * @descrition -
    * @decorator - @Mutation
    * @type - Mutation<T>
    * @arguments - people - The array of people objects
    */
   @Mutation
-  setRequestStart(requestStart) {
-    console.log('SET START: ', requestStart)
-    this.requestStart = requestStart
+  setRequestCached(isCached) {
+    this.requestCached = isCached
+  }
+
+  /*
+   * @name -  addRequestEndPoint
+   * @descrition -
+   * @decorator - @Mutation
+   * @type - Mutation<T>
+   * @arguments - people - The array of people objects
+   */
+  @Mutation
+  addRequestEndPoint(endpoint) {
+    if (!this.requestEndPoints.includes(endpoint)) {
+      this.requestEndPoints.push(endpoint)
+    }
   }
 
   /*
@@ -65,6 +78,17 @@ export default class MissionControlModule extends VuexModule {
   }
 
   /*
+   * @name -  clearRequestEndpoints
+   * @descrition -
+   * @decorator - @Mutation
+   * @type - Mutation<T>
+   */
+  @Mutation
+  clearRequestEndpoints() {
+    this.requestEndPoints = []
+  }
+
+  /*
    * @name - responseSize
    * @descrition -
    */
@@ -87,4 +111,16 @@ export default class MissionControlModule extends VuexModule {
    * @descrition -
    */
   requestTotal = ''
+
+  /*
+   * @name - requestEndPoints
+   * @descrition -
+   */
+  requestEndPoints = []
+
+  /*
+   * @name - requestCached
+   * @descrition -
+   */
+  requestCached
 }

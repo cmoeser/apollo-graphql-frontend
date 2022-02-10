@@ -19,8 +19,8 @@
                 <p class="info-text-p">
                   <span>Manager:&nbsp;</span>
                   I would like you to create a list of listing
-                  <em>titles &amp; summary's</em>. It will be displayed on our
-                  home page.
+                  <strong><em>titles &amp; summary's</em></strong> It will be
+                  displayed on our home page.
                 </p>
                 <p class="info-text-p">
                   <span>API Developer:&nbsp;</span>
@@ -29,7 +29,7 @@
                   listings requirements at /listings.
                 </p>
               </div>
-              <div class="info-text">
+              <div class="info-text middle">
                 <p class="info-text-title">What I want:&nbsp;</p>
                 <p>
                   id<br />
@@ -40,17 +40,22 @@
               <div class="info-text">
                 <p class="info-text-title">What I get:&nbsp;</p>
                 <g-q-response-size :response-data="responseData" />
-                <div v-if="responseData.length > 0">
-                  <div v-for="(value, key) in responseData[0]" :key="key">
-                    <strong>{{ key }}</strong
-                    ><br />
-                    {{ value }}
+                <div v-if="listingsREST.length > 0">
+                  <div
+                    v-for="(value, key) in listingsREST[0]"
+                    :key="key"
+                    class="column"
+                  >
+                    <div v-if="key !== '__typename'">
+                      <div class="key-div">{{ key }}</div>
+                      <div class="value-div">{{ value }}</div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="info-row">
-              <v-btn @click="getListings()">Get Listings</v-btn>
+              <v-btn @click="getListingsREST()">Get Listings</v-btn>
             </div>
           </v-card-text>
         </v-card>
@@ -58,10 +63,53 @@
 
       <v-tab-item>
         <v-card flat>
-          <v-card-text v-if="listings">
-            <div class="listing-wrapper">gfdgf</div>
+          <v-card-text>
+            <div class="info-box">
+              <div class="info-text">
+                <p class="info-text-title">Scenario:</p>
+
+                <p class="info-text-p">
+                  <span>Manager:&nbsp;</span>
+                  I would like you to create a list of listing
+                  <strong><em>titles &amp; summary's</em></strong> It will be
+                  displayed on our home page.
+                </p>
+                <p class="info-text-p">
+                  <span>API Developer:&nbsp;</span>
+                  We don't have the bandwith for a new endpoint, you'll have to
+                  use the existing listings API endpoint we use for all other
+                  listings requirements at /listings.
+                </p>
+              </div>
+              <div class="info-text middle">
+                <p class="info-text-title">What I want:&nbsp;</p>
+                <p>
+                  id<br />
+                  field_listing_title<br />
+                  field_listing_desc_1
+                </p>
+              </div>
+              <div class="info-text">
+                <p class="info-text-title">What I get:&nbsp;</p>
+                <g-q-response-size :response-data="responseData" />
+                <div v-if="listingsGQL.length > 0">
+                  <div
+                    v-for="(value, key) in listingsGQL[0]"
+                    :key="key"
+                    class="column"
+                  >
+                    <div v-if="key !== '__typename'">
+                      <div class="key-div">{{ key }}</div>
+                      <div class="value-div">{{ value }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <v-btn @click="getListingsGQL()">Get Listings</v-btn>
+            </div>
           </v-card-text>
-          <v-btn @click="getListing('746')">Get Listings</v-btn>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -108,7 +156,9 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   items = ['REST API', 'GraphQL']
 
-  listings = {}
+  listingsREST = {}
+
+  listingsGQL = {}
 
   isOpen = false
 
@@ -118,7 +168,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   responseData = []
 
-  getListings() {
+  getListingsREST() {
     const markerNameA = 'example-marker-a'
     const markerNameB = 'example-marker-b'
 
@@ -138,33 +188,18 @@ export default class GQOverPage extends mixins(GQBasePage) {
         performance.measure('measure from navigation start to now')
 
         // Pull out all of the measurements.
-        console.log(performance.getEntriesByType('measure'))
+        const newDate = new Date(performance.timing.requestStart * 1000)
+        // console.log('New Date :: ', newDate.getSeconds())
+        console.log(performance)
 
         // Finally, clean up the entries.
         performance.clearMarks()
         performance.clearMeasures()
       }, 1000)
     }, 1000)
-    /*
-    const timeStartLink = new ApolloLink((operation, forward) => {
-      operation.setContext({ start: performance.now() })
-      return forward(operation)
-    })
 
-    const logTimeLink = new ApolloLink((operation, forward) =>
-      forward(operation).map((data) => {
-        // data from a previous link
-        const time = performance.now() - operation.getContext().start
-        console.log(
-          `operation ${operation.operationName} took ${time} to complete`,
-        )
-        return data
-      }),
-    )
-
-    const link = timeStartLink.concat(logTimeLink)
-    console.log('LINK:: ', link)
-    */
+    this.$store.commit('missionControlState/clearRequestEndpoints')
+    this.$store.commit('missionControlState/addRequestEndPoint', '/listings')
 
     const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
 
@@ -176,10 +211,10 @@ export default class GQOverPage extends mixins(GQBasePage) {
               listings {
                 id
                 field_listing_title
-                field_listing_desc
                 field_listing_desc_1
-                listing_additional_info
-                listing_dates
+                field_listing_desc
+                field_listing_additional_info
+                field_listing_dates
                 field_image
                 field_thumbnail
               }
@@ -188,9 +223,8 @@ export default class GQOverPage extends mixins(GQBasePage) {
         })
         .then((resp) => {
           console.log('RESPONSE:: ', resp)
-          console.log('TIME:: ', resp.timing)
 
-          this.listings = resp.data.listings
+          this.listingsREST = resp.data.listings
           this.responseData = resp.data.listings
           console.log('DES:: ', this.responseData)
 
@@ -202,7 +236,70 @@ export default class GQOverPage extends mixins(GQBasePage) {
     })
   }
 
-  getListing(nid) {
+  getListingsGQL() {
+    const markerNameA = 'example-marker-a'
+    const markerNameB = 'example-marker-b'
+
+    // Run some nested timeouts, and create a PerformanceMark for each.
+    performance.mark(markerNameA)
+    setTimeout(() => {
+      performance.mark(markerNameB)
+      setTimeout(() => {
+        // Create a variety of measurements.
+        performance.measure('measure a to b', markerNameA, markerNameB)
+        performance.measure('measure a to now', markerNameA)
+        performance.measure(
+          'measure from navigation start to b',
+          undefined,
+          markerNameB,
+        )
+        performance.measure('measure from navigation start to now')
+
+        // Pull out all of the measurements.
+        const newDate = new Date(performance.timing.requestStart * 1000)
+        // console.log('New Date :: ', newDate.getSeconds())
+        console.log(performance)
+
+        // Finally, clean up the entries.
+        performance.clearMarks()
+        performance.clearMeasures()
+      }, 1000)
+    }, 1000)
+
+    this.$store.commit('missionControlState/clearRequestEndpoints')
+    this.$store.commit('missionControlState/addRequestEndPoint', '/listings')
+
+    const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
+
+    return new Promise((resolve, reject) => {
+      clientApollo
+        .query({
+          query: gql`
+            query {
+              listings {
+                id
+                field_listing_title
+                field_listing_desc_1
+              }
+            }
+          `,
+        })
+        .then((resp) => {
+          console.log('RESPONSE:: ', resp)
+
+          this.listingsGQL = resp.data.listings
+          this.responseData = resp.data.listings
+          console.log('DES:: ', this.responseData)
+
+          resolve(resp)
+        })
+        .catch((err) => {
+          resolve(err)
+        })
+    })
+  }
+
+  getListingWNID(nid) {
     const clientApollo = this.$apolloProvider.defaultClient
 
     return new Promise((resolve, reject) => {
@@ -257,12 +354,17 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
 .info-text {
   max-height: 400px;
+  max-width: 350px;
   overflow-y: auto;
   flex: 1 1 33%;
   padding: var(--space-sm) var(--space-md);
   border: 1px solid var(--extra-light-grey);
   border-radius: 16px;
   margin: 0 var(--space-md);
+}
+
+.info-text.middle {
+  flex: 1 1 24%;
 }
 
 .info-text em {

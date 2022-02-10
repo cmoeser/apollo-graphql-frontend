@@ -3,21 +3,18 @@
     <div class="gq-mission-control-header">Mission Control</div>
     <div class="gq-mission-control-content-wrapper">
       <div class="gq-mission-control-content-item">
-        Request Start: <span>{{ requestStart }}</span>
-      </div>
-      <div class="gq-mission-control-content-item">
-        Request Finish: <span>{{ requestFinish }}</span>
-      </div>
-      <div class="gq-mission-control-content-item">
-        Request Total: <span>{{ requestTotal }}</span>
-      </div>
-      <div class="gq-mission-control-content-item">
         Response Size: <span> {{ responseSize }} </span>
       </div>
       <div class="gq-mission-control-content-item">
-        Request End Point(s): <span>{{ requestTotal }}</span>
+        Request End Point(s):<br />
+        <span v-for="(endpoint, index) in requestEndPoints" :key="index">
+          {{ endpoint }}</span
+        >
       </div>
-      <div class="gq-mission-control-content-item">Cached: <span></span></div>
+      <div class="gq-mission-control-content-item">
+        Cached: <br />
+        <span>{{ requestCached }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +38,16 @@ import { State } from 'vuex-class'
  */
 @Component({})
 export default class GQMissionControl extends Vue {
+  /*
+   * @name -
+   * @descrition -
+   * @decorator - @State
+   * @type - Sate<T>
+   * @param - namespace: string -
+   */
+  @State('requestEndPoints', { namespace: 'missionControlState' })
+  requestEndPoints
+
   /*
    * @name -
    * @descrition -
@@ -80,6 +87,16 @@ export default class GQMissionControl extends Vue {
    */
   @State('requestStart', { namespace: 'missionControlState' })
   requestStart
+
+  /*
+   * @name -
+   * @descrition -
+   * @decorator - @State
+   * @type - Sate<T>
+   * @param - namespace: string -
+   */
+  @State('requestCached', { namespace: 'missionControlState' })
+  requestCached
 }
 </script>
 
@@ -118,5 +135,7 @@ export default class GQMissionControl extends Vue {
 
 .gq-mission-control-content-item span {
   font-weight: bold;
+  display: block;
+  margin-top: var(--space-xs);
 }
 </style>

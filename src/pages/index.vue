@@ -23,7 +23,7 @@ export default class GQIndexPage extends mixins(GQBasePage) {
 
 <style>
 .container {
-  margin: 40px auto;
+  margin: 60px auto;
   min-height: 100vh;
   display: flex;
   justify-content: center;
