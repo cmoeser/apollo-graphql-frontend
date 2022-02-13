@@ -37,5 +37,5 @@ const httpLink = new HttpLink({
 export default new ApolloClient({
   defaultHttpLink: false,
   cache: new InMemoryCache(),
-  link: from([timeStartLink, persistedQueriesLink.concat(httpLink)]),
+  link: persistedQueriesLink.concat(httpLink),
 })

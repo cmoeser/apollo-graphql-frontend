@@ -326,7 +326,7 @@ export default class GQUnderPage extends mixins(GQBasePage) {
   }
 
   generateQuery() {
-    let query = ''
+    let query = ``
 
     const selectedID = this.selectedID === true ? 'nid' : ''
     const selectedTitle = this.selectedTitle === true ? 'title' : ''

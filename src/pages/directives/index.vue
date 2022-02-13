@@ -18,44 +18,44 @@
 
                 <p class="info-text-p">
                   <span>Manager:&nbsp;</span>
-                  I would like you to create a list of listing
-                  <em>titles &amp; summary's</em>. It will be displayed on our
-                  home page.
-                </p>
-                <p class="info-text-p">
-                  <span>API Developer:&nbsp;</span>
-                  We don't have the bandwith for a new endpoint, you'll have to
-                  use the existing listings API endpoint we use for all other
-                  listings requirements at /listings.
+                  I would like you to create 2 pages of people with their first
+                  and last name on both and their titles only on the second
+                  page.
                 </p>
               </div>
               <div class="info-text">
                 <p class="info-text-title">What I want:&nbsp;</p>
                 <p>
-                  id<br />
-                  field_listing_title<br />
-                  field_listing_desc_1
+                  <v-checkbox
+                    v-model="withTitle"
+                    label="With Title?"
+                  ></v-checkbox>
+                </p>
+                <p>
+                  title<br />
+                  field_firstname<br />
+                  field_lastname
                 </p>
               </div>
               <div class="info-text">
                 <p class="info-text-title">What I get:&nbsp;</p>
                 <g-q-response-size :response-data="responseData" />
-                <div v-if="responseData.length > 0">{{ responseData[0] }}</div>
+                <div v-if="responseData.length > 0">
+                  <div
+                    v-for="(field, key, index) in responseData[0]"
+                    :key="index"
+                  >
+                    <div v-if="key !== '__typename'">
+                      <span>{{ key }} </span>{{ field }}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="info-row">
-              <v-btn @click="getNames()">Get Listings</v-btn>
+              <v-btn @click="getPeopleWithTitle()">Get People</v-btn>
             </div>
           </v-card-text>
-        </v-card>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text v-if="listings">
-            <div class="listing-wrapper">gfdgf</div>
-          </v-card-text>
-          <v-btn @click="getListing('746')">Get Listings</v-btn>
         </v-card>
       </v-tab-item>
     </v-tabs-items>
@@ -100,7 +100,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   tab = 0
 
-  items = ['REST API', 'GraphQL']
+  items = ['GraphQL']
 
   listings = {}
 
@@ -112,27 +112,11 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   responseData = []
 
-  getNames() {
-    /*
-    const timeStartLink = new ApolloLink((operation, forward) => {
-      operation.setContext({ start: performance.now() })
-      return forward(operation)
-    })
+  withTitle = false
 
-    const logTimeLink = new ApolloLink((operation, forward) =>
-      forward(operation).map((data) => {
-        // data from a previous link
-        const time = performance.now() - operation.getContext().start
-        console.log(
-          `operation ${operation.operationName} took ${time} to complete`,
-        )
-        return data
-      }),
-    )
-
-    const link = timeStartLink.concat(logTimeLink)
-    console.log('LINK:: ', link)
-    */
+  getPeopleWithTitle() {
+    this.$store.commit('missionControlState/clearRequestEndpoints')
+    this.$store.commit('missionControlState/addRequestEndPoint', '/people')
 
     const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
 
@@ -140,64 +124,30 @@ export default class GQOverPage extends mixins(GQBasePage) {
       clientApollo
         .query({
           query: gql`
-            query {
-              people {
+            query GetPeopleWithTitle($withTitle: Boolean!) {
+              getPeopleWithTitle(withTitle: $withTitle) {
+                title @include(if: $withTitle)
                 field_firstname
                 field_lastname
-                fullName
               }
             }
           `,
+          variables: { withTitle: this.withTitle },
         })
         .then((resp) => {
           console.log('RESPONSE:: ', resp)
           console.log('TIME:: ', resp.timing)
 
-          this.listings = resp.data.listings
-          this.responseData = resp.data.listings
+          // this.listings = resp.data.listings
+          this.responseData = resp.data.getPeopleWithTitle
           console.log('DES:: ', this.responseData)
 
           resolve(resp)
         })
         .catch((err) => {
-          resolve(err)
+          reject(err)
         })
     })
-  }
-
-  getListing(nid) {
-    const clientApollo = this.$apolloProvider.defaultClient
-
-    return new Promise((resolve, reject) => {
-      console.time()
-      clientApollo
-        .query({
-          query: gql`
-            query queryAsociated($nid: ID!) {
-              getAssociated(nid: $nid) {
-                title
-              }
-            }
-          `,
-
-          variables: { $nid: '746' },
-        })
-        .then((resp) => {
-          console.timeEnd()
-          console.log('Listing', resp.data.listings)
-          console.log('TIME:: ', this.resp.timing)
-          this.listings = resp.data.listings
-          this.responseData = resp.data.listings
-          resolve(resp)
-        })
-        .catch((err) => {
-          resolve(err)
-        })
-    })
-  }
-
-  setTab(index) {
-    this.tab = index
   }
 }
 </script>
