@@ -188,7 +188,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
         performance.measure('measure from navigation start to now')
 
         // Pull out all of the measurements.
-        const newDate = new Date(performance.timing.requestStart * 1000)
+        // const newDate = new Date(performance.timing.requestStart * 1000)
         // console.log('New Date :: ', newDate.getSeconds())
         console.log(performance)
 
@@ -256,7 +256,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
         performance.measure('measure from navigation start to now')
 
         // Pull out all of the measurements.
-        const newDate = new Date(performance.timing.requestStart * 1000)
+        // const newDate = new Date(performance.timing.requestStart * 1000)
         // console.log('New Date :: ', newDate.getSeconds())
         console.log(performance)
 

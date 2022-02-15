@@ -191,7 +191,7 @@ export default class GQUnderPage extends mixins(GQBasePage) {
    */
   name = 'Under Fetching'
 
-  tab = 1
+  tab = 0
 
   items = ['REST API', 'GraphQL']
 

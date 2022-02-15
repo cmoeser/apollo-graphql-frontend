@@ -1,11 +1,12 @@
 import { HttpLink } from 'apollo-link-http'
-import { setContext } from 'apollo-link-context'
-import { from } from 'apollo-link'
+//  import { setContext } from 'apollo-link-context'
+// import { from } from 'apollo-link'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloLink, ApolloClient } from '@apollo/client'
+import { ApolloClient } from '@apollo/client'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import { sha256 } from 'js-sha256'
 
+/*
 const timeStartLink = new ApolloLink((operation, forward) => {
   operation.setContext({ start: performance.now() })
   return forward(operation)
@@ -27,6 +28,7 @@ const logTimeLink = new ApolloLink((operation, forward) =>
     return response
   }),
 )
+*/
 
 const persistedQueriesLink = createPersistedQueryLink({ sha256 })
 
