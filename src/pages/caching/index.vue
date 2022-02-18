@@ -18,31 +18,23 @@
 
                 <p class="info-text-p">
                   <span>Manager:&nbsp;</span>
-                  I would like you to create a list of listing
-                  <strong><em>titles &amp; summary's</em></strong> It will be
-                  displayed on our home page.
-                </p>
-                <p class="info-text-p">
-                  <span>API Developer:&nbsp;</span>
-                  We don't have the bandwith for a new endpoint, you'll have to
-                  use the existing listings API endpoint we use for all other
-                  listings requirements at /listings.
+                  I would like you to create a list of People
                 </p>
               </div>
               <div class="info-text middle">
                 <p class="info-text-title">What I want:&nbsp;</p>
                 <p>
-                  id<br />
-                  field_listing_title<br />
-                  field_listing_desc_1
+                  title @cacheControl(maxAge: 30)<br />
+                  field_firstname @cacheControl(maxAge: 300)<br />
+                  field_lastname @cacheControl(maxAge: 300)
                 </p>
               </div>
               <div class="info-text">
                 <p class="info-text-title">What I get:&nbsp;</p>
                 <g-q-response-size :response-data="responseData" />
-                <div v-if="listingsREST.length > 0">
+                <div v-if="peopleWCache.length > 0">
                   <div
-                    v-for="(value, key) in listingsREST[0]"
+                    v-for="(value, key) in peopleWCache[0]"
                     :key="key"
                     class="column"
                   >
@@ -55,59 +47,7 @@
               </div>
             </div>
             <div class="info-row">
-              <v-btn @click="getListingsREST()">Get Listings</v-btn>
-            </div>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-
-      <v-tab-item>
-        <v-card flat>
-          <v-card-text>
-            <div class="info-box">
-              <div class="info-text">
-                <p class="info-text-title">Scenario:</p>
-
-                <p class="info-text-p">
-                  <span>Manager:&nbsp;</span>
-                  I would like you to create a list of listing
-                  <strong><em>titles &amp; summary's</em></strong> It will be
-                  displayed on our home page.
-                </p>
-                <p class="info-text-p">
-                  <span>API Developer:&nbsp;</span>
-                  We don't have the bandwith for a new endpoint, you'll have to
-                  use the existing listings API endpoint we use for all other
-                  listings requirements at /listings.
-                </p>
-              </div>
-              <div class="info-text middle">
-                <p class="info-text-title">What I want:&nbsp;</p>
-                <p>
-                  id<br />
-                  field_listing_title<br />
-                  field_listing_desc_1
-                </p>
-              </div>
-              <div class="info-text">
-                <p class="info-text-title">What I get:&nbsp;</p>
-                <g-q-response-size :response-data="responseData" />
-                <div v-if="listingsGQL.length > 0">
-                  <div
-                    v-for="(value, key) in listingsGQL[0]"
-                    :key="key"
-                    class="column"
-                  >
-                    <div v-if="key !== '__typename'">
-                      <div class="key-div">{{ key }}</div>
-                      <div class="value-div">{{ value }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="info-row">
-              <v-btn @click="getListingsGQL()">Get Listings</v-btn>
+              <v-btn @click="getpeopleWithCache()">Get Listings</v-btn>
             </div>
           </v-card-text>
         </v-card>
@@ -150,15 +90,13 @@ export default class GQOverPage extends mixins(GQBasePage) {
    * @name -  name
    * @descrition -
    */
-  name = 'Over Fetching'
+  name = 'Caching'
 
   tab = 0
 
-  items = ['REST API', 'GraphQL']
+  items = ['GraphQL']
 
-  listingsREST = {}
-
-  listingsGQL = {}
+  peopleWCache = {}
 
   isOpen = false
 
@@ -168,7 +106,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
 
   responseData = []
 
-  getListingsREST() {
+  getpeopleWithCache() {
     const markerNameA = 'example-marker-a'
     const markerNameB = 'example-marker-b'
 
@@ -208,130 +146,27 @@ export default class GQOverPage extends mixins(GQBasePage) {
         .query({
           query: gql`
             query {
-              listings {
-                id
-                field_listing_title
-                field_listing_desc_1
-                field_listing_desc
-                field_listing_additional_info
-                field_listing_dates
-                field_image
-                field_thumbnail
-              }
-            }
-          `,
-        })
-        .then((resp) => {
-          console.log('RESPONSE:: ', resp)
-
-          this.listingsREST = resp.data.listings
-          this.responseData = resp.data.listings
-          console.log('DES:: ', this.responseData)
-
-          resolve(resp)
-        })
-        .catch((err) => {
-          resolve(err)
-        })
-    })
-  }
-
-  getListingsGQL() {
-    const markerNameA = 'example-marker-a'
-    const markerNameB = 'example-marker-b'
-
-    // Run some nested timeouts, and create a PerformanceMark for each.
-    performance.mark(markerNameA)
-    setTimeout(() => {
-      performance.mark(markerNameB)
-      setTimeout(() => {
-        // Create a variety of measurements.
-        performance.measure('measure a to b', markerNameA, markerNameB)
-        performance.measure('measure a to now', markerNameA)
-        performance.measure(
-          'measure from navigation start to b',
-          undefined,
-          markerNameB,
-        )
-        performance.measure('measure from navigation start to now')
-
-        // Pull out all of the measurements.
-        // const newDate = new Date(performance.timing.requestStart * 1000)
-        // console.log('New Date :: ', newDate.getSeconds())
-        console.log(performance)
-
-        // Finally, clean up the entries.
-        performance.clearMarks()
-        performance.clearMeasures()
-      }, 1000)
-    }, 1000)
-
-    this.$store.commit('missionControlState/clearRequestEndpoints')
-    this.$store.commit('missionControlState/addRequestEndPoint', '/listings')
-
-    const clientApollo = graphqlClient // this.$apolloProvider.defaultClient
-
-    return new Promise((resolve, reject) => {
-      clientApollo
-        .query({
-          query: gql`
-            query {
-              listings {
-                id
-                field_listing_title
-                field_listing_desc_1
-              }
-            }
-          `,
-        })
-        .then((resp) => {
-          console.log('RESPONSE:: ', resp)
-
-          this.listingsGQL = resp.data.listings
-          this.responseData = resp.data.listings
-          console.log('DES:: ', this.responseData)
-
-          resolve(resp)
-        })
-        .catch((err) => {
-          resolve(err)
-        })
-    })
-  }
-
-  getListingWNID(nid) {
-    const clientApollo = this.$apolloProvider.defaultClient
-
-    return new Promise((resolve, reject) => {
-      console.time()
-      clientApollo
-        .query({
-          query: gql`
-            query queryAsociated($nid: ID!) {
-              getAssociated(nid: $nid) {
+              peopleWCache {
                 title
+                field_firstname
+                field_lastname
               }
             }
           `,
-
-          variables: { $nid: '746' },
         })
         .then((resp) => {
-          console.timeEnd()
-          console.log('Listing', resp.data.listings)
-          console.log('TIME:: ', this.resp.timing)
-          this.listings = resp.data.listings
-          this.responseData = resp.data.listings
+          console.log('RESPONSE:: ', resp)
+
+          this.peopleWCache = resp.data.peopleWCache
+          this.responseData = resp.data.peopleWCache
+          console.log('DES:: ', this.responseData)
+
           resolve(resp)
         })
         .catch((err) => {
           resolve(err)
         })
     })
-  }
-
-  setTab(index) {
-    this.tab = index
   }
 }
 </script>
@@ -364,7 +199,7 @@ export default class GQOverPage extends mixins(GQBasePage) {
 }
 
 .info-text.middle {
-  flex: 1 1 24%;
+  flex: 1 1 44%;
 }
 
 .info-text em {

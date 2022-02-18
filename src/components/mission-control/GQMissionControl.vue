@@ -2,19 +2,19 @@
   <div class="gq-mission-control">
     <div class="gq-mission-control-header">Mission Control</div>
     <div class="gq-mission-control-content-wrapper">
-      <div class="gq-mission-control-content-item">
+      <!--<div class="gq-mission-control-content-item">
         Response Size: <span> {{ responseSize }} </span>
-      </div>
+      </div>-->
       <div class="gq-mission-control-content-item">
         Request End Point(s):<br />
         <span v-for="(endpoint, index) in requestEndPoints" :key="index">
           {{ endpoint }}</span
         >
       </div>
-      <div class="gq-mission-control-content-item">
+      <!--<div class="gq-mission-control-content-item">
         Cached: <br />
         <span>{{ requestCached }}</span>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
